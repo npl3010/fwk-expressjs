@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --inspect src/app.js",
-    "sass": "sass --watch src/views:public/css"
+    "sass": "sass --watch src/views:public/css",
+    "beautify1": "prettier --write \"src/**/*.{js,json,css,scss}\"",
+    "beautify2": "lint-staged",
+    "prepare": "husky install"
   },
   "author": "",
   "license": "ISC",
@@ -15,8 +18,11 @@
     "express-handlebars": "^7.0.7"
   },
   "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.22",
+    "prettier": "^2.8.8",
     "sass": "^1.62.1"
   }
 }
