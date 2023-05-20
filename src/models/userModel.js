@@ -15,8 +15,9 @@ const User = new Schema({
   phone: { type: Number, required: true },
   age: { type: Number, min: 18 },
   bio: { type: String, match: /[a-z]/ },
-  created_at: { type: Date, default: Date.now },
-  updated_at: { type: Date, default: Date.now },
+  created_at: { type: Date, default: Date.now() },
+  updated_at: { type: Date, default: Date.now() },
+  deleted_at: { type: Date },
 });
 
 const UserModel = mongoose.model('User', User);

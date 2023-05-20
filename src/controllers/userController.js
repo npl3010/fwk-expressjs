@@ -3,7 +3,10 @@ const UserModal = require('../models/userModel');
 class UserController {
   // [GET] /user
   index = (req, res, next) => {
-    UserModal.find({})
+    const fetchParams = {
+      deleted_at: undefined,
+    };
+    UserModal.find(fetchParams)
       .then((docs) => {
         const userList = docs.map((doc) => {
           return doc.toObject();
@@ -146,8 +149,8 @@ class UserController {
     }
   };
 
-  // [DELETE] /user/store/:id
-  delete = (req, res, next) => {
+  // [DELETE] /user/delete-hardly/:id
+  deleteHardly = (req, res, next) => {
     /**
      * Note about the request:
      * - req.query: Get URL query parameters.
@@ -160,6 +163,34 @@ class UserController {
         _id: userId,
       };
       UserModal.deleteOne(fetchParams)
+        .then((doc) => {
+          // res.json(doc);
+          res.redirect('/user');
+        })
+        .catch((error) => {
+          // res.json(error);
+          res.status(400).send('Bad Request');
+        });
+    }
+  };
+
+  // [POST] /user/delete-softly/:id
+  deleteSoftly = (req, res, next) => {
+    /**
+     * Note about the request:
+     * - req.query: Get URL query parameters.
+     * - req.body: Get request body.
+     * - req.params: Get route parameters.
+     */
+    const userId = req.params.id;
+    if (userId) {
+      const fetchParams = {
+        _id: userId,
+      };
+      const formData = {
+        deleted_at: Date.now(),
+      };
+      UserModal.updateOne(fetchParams, formData)
         .then((doc) => {
           // res.json(doc);
           res.redirect('/user');

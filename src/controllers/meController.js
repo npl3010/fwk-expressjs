@@ -6,7 +6,10 @@ class MeController {
 
   // [GET] /me/my-employees
   employees = (req, res, next) => {
-    UserModal.find({})
+    const fetchParams = {
+      deleted_at: undefined,
+    };
+    UserModal.find(fetchParams)
       .then((docs) => {
         const userList = docs.map((doc) => {
           return doc.toObject();
