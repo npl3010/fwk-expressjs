@@ -1,6 +1,6 @@
 .navbar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 16px;
   padding: 16px;
@@ -8,4 +8,11 @@
   border-radius: 10px;
   color: #fff;
   background-color: #aaa;
+
+  .navbar-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
 }

@@ -1,0 +1,75 @@
+<div class="content-wrapper user-wrapper">
+    <div class="content">
+        <a class="btn-addnew" href="/user/create">(+) Add new</a>
+
+        {{#if userList}}
+        <div class="list">
+            {{#each userList}}
+            <div class="list-item">
+                <div class="item-content">
+                    {{getListItemNumber @index}}
+                    <a href="/user/{{this._id}}">{{this.fullname}}</a>
+                </div>
+                <div class="item-actions">
+                    <a class="btn-update" href="/user/update/{{this._id}}">(u) Update</a>
+                    <a class="btn-delete" href="#" data-next-action="/user/delete/{{this._id}}?_method=DELETE">
+                        (-) Delete
+                    </a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+    </div>
+</div>
+
+<div class="confirm-modal-root">
+    <div class="confirm-modal-overlay"></div>
+    <div class="confirm-modal">
+        <form class="confirm-form" method="post" action="#"></form>
+        <div class="confirm-message">...</div>
+        <div class="confirm-actions">
+            <button class="btn-ok">Ok</button>
+            <button class="btn-cancel">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const handleToggleModalConfirm = (e) => {
+        const elemConfirmModalRoot = document.querySelector('.confirm-modal-root');
+        elemConfirmModalRoot.classList.toggle('visible');
+    };
+
+    const handleClickButtonDelete = (e) => {
+        e.preventDefault();
+        // Modal data:
+        const nextAction = e.target.getAttribute('data-next-action');
+        // Modal elements:
+        const elemConfirmModalRoot = document.querySelector('.confirm-modal-root');
+        const elemConfirmModalForm = elemConfirmModalRoot.querySelector('.confirm-form');
+        const elemConfirmModalMessage = elemConfirmModalRoot.querySelector('.confirm-message');
+        const elemConfirmModalOk = elemConfirmModalRoot.querySelector('.btn-ok');
+        const elemConfirmModalCancel = elemConfirmModalRoot.querySelector('.btn-cancel');
+        // Modal's event handlers:
+        const handleSubmitModalForm = (e) => {
+            elemConfirmModalForm.submit();
+        };
+        // Modal view & events:
+        elemConfirmModalForm.setAttribute('action', nextAction);
+        elemConfirmModalMessage.innerHTML = `Next action:<br>${nextAction}`;
+        elemConfirmModalRoot.classList.toggle('visible');
+        elemConfirmModalOk.addEventListener('click', handleSubmitModalForm);
+        elemConfirmModalCancel.addEventListener('click', handleToggleModalConfirm);
+    };
+
+    // 1.
+    const elemConfirmModalOverlay = document.querySelector('.confirm-modal-root .confirm-modal-overlay');
+    elemConfirmModalOverlay.addEventListener('click', handleToggleModalConfirm);
+
+    // 2.
+    const elemListBtnDelete = document.querySelectorAll('.item-actions .btn-delete');
+    elemListBtnDelete.forEach((item, itemIndex) => {
+        item.addEventListener('click', handleClickButtonDelete);
+    });
+</script>

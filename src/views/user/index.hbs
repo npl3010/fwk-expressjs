@@ -1,0 +1,25 @@
+<div class="content-wrapper user-wrapper">
+    {{#if showPageContent}}
+    <div class="content">
+        <div class="title">Content: {{pageContent}}</div>
+
+        <a class="btn-addnew" href="/user/create">(+) Add new</a>
+
+        {{#if userList}}
+        <div class="list">
+            {{#each userList}}
+            <div class="list-item">
+                <a href="/user/{{this._id}}">{{this.fullname}}</a>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        {{#if userDetail}}
+        <div class="detail">
+            <div>{{userDetail.fullname}}</div>
+        </div>
+        {{/if}}
+    </div>
+    {{/if}}
+</div>

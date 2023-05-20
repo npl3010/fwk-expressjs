@@ -9,3 +9,74 @@ body {
   margin: 0;
   background-color: #eee;
 }
+
+.content-wrapper {
+  border-radius: 10px;
+  background-color: #fff;
+  overflow: hidden;
+
+  .content {
+    padding: 16px;
+    min-height: 150px;
+    max-height: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .title {
+      padding-bottom: 16px;
+      border-bottom: 1px solid #000;
+      font-weight: bold;
+    }
+
+    & > *:not(:last-child) {
+      margin-bottom: 16px;
+    }
+  }
+}
+
+.list {
+  width: 350px;
+
+  .list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .item-content,
+    .item-actions {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+}
+
+.confirm-modal-root {
+  display: none;
+
+  .confirm-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 16px;
+    z-index: 1000;
+  }
+
+  .confirm-modal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba($color: #000000, $alpha: 0.2);
+    z-index: 900;
+  }
+
+  &.visible {
+    display: block;
+  }
+}

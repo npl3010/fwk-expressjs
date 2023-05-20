@@ -1,0 +1,25 @@
+<div class="user-form-wrapper">
+    <form method="post" action="/user/store/{{userDetail._id}}{{queries}}">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="{{userDetail.username}}">
+        </div>
+        <div>
+            <label for="fullname">Full name:</label>
+            <input type="text" id="fullname" name="fullname" value="{{userDetail.fullname}}">
+        </div>
+        <div>
+            <label for="phone">Phone:</label>
+            <input type="number" id="phone" name="phone" value="{{userDetail.phone}}">
+        </div>
+        <div>
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" value="{{userDetail.age}}">
+        </div>
+        <div>
+            <label for="bio">Bio:</label>
+            <input type="text" id="bio" name="bio" value="{{userDetail.bio}}">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>

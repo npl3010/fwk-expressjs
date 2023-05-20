@@ -2,6 +2,8 @@ const express = require('express');
 const { engine } = require('express-handlebars');
 const morgan = require('morgan');
 const route = require('./routes');
+const database = require('./config/database');
+const methodOverride = require('method-override');
 
 const app = express();
 const port = 3000;
@@ -25,9 +27,14 @@ app.set('view engine', 'hbs');
 
 /**
  * 4. Middlewares:
+ * - Express's middlewares.
  * - HTTP request logging: morgan.
+ * - HTTP method overriding: method-override.
  */
-app.use(morgan('combined'));
+app.use(express.urlencoded({ extended: true })); // To parse incoming request bodies and make it available on the req.body property.
+app.use(express.json()); // To parse incoming JSON request bodies and make the resulting data available on the req.body property of the request object.
+app.use(morgan('combined')); // To log request details.
+app.use(methodOverride('_method')); // To override HTTP methods.
 
 /**
  * 5. Routing:
@@ -35,7 +42,12 @@ app.use(morgan('combined'));
 route(app);
 
 /**
- * 6. Start a server and listen on port 3000 for connections:
+ * 6. Connect to database:
+ */
+database.connect();
+
+/**
+ * 7. Start a server and listen on port 3000 for connections:
  */
 app.listen(port, () => {
   console.log(`fwk-expressjs app listening on port ${port}`);
