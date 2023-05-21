@@ -174,7 +174,7 @@ class UserController {
     }
   };
 
-  // [POST] /user/delete-softly/:id
+  // [PATCH] /user/delete-softly/:id
   deleteSoftly = (req, res, next) => {
     /**
      * Note about the request:
