@@ -30,16 +30,21 @@ body {
   margin-bottom: 16px;
 }
 
-.list {
+.list-wrapper .list-actions {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.list-wrapper .list {
   width: 350px;
 }
-.list .list-item {
+.list-wrapper .list .list-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.list .list-item .item-content,
-.list .list-item .item-actions {
+.list-wrapper .list .list-item .item-content,
+.list-wrapper .list .list-item .item-actions {
   display: flex;
   justify-content: flex-start;
   align-items: center;

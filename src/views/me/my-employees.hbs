@@ -3,21 +3,32 @@
         <a class="btn-addnew" href="/user/create">(+) Add new</a>
 
         {{#if userList}}
-        <div class="list">
-            {{#each userList}}
-            <div class="list-item">
-                <div class="item-content">
-                    {{getListItemNumber @index}}
-                    <a href="/user/{{this._id}}">{{this.fullname}}</a>
-                </div>
-                <div class="item-actions">
-                    <a class="btn-update" href="/user/update/{{this._id}}">(u) Update</a>
-                    <a class="btn-delete" href="#" data-next-action="/user/delete-softly/{{this._id}}?_method=PATCH">
-                        (-) Delete
-                    </a>
-                </div>
+        <div class="list-wrapper">
+            <div class="list-actions">
+                <a href="/me/my-employees?my_sort=desc&my_sort_column=fullname">fullname: (max>>min) (desc)</a>
+                <a href="/me/my-employees?my_sort=asc&my_sort_column=fullname">fullname: (min>>max) (asc)</a>
             </div>
-            {{/each}}
+            <div class="list-actions">
+                {{{sortViewHelper mySortCurrent 'fullname'}}}
+                {{{sortViewHelper mySortCurrent 'age'}}}
+            </div>
+            <div class="list">
+                {{#each userList}}
+                <div class="list-item">
+                    <div class="item-content">
+                        {{getListItemNumber @index}}
+                        <a href="/user/{{this._id}}">{{this.fullname}}</a>
+                    </div>
+                    <div class="item-actions">
+                        <a class="btn-update" href="/user/update/{{this._id}}">(u) Update</a>
+                        <a class="btn-delete" href="#"
+                            data-next-action="/user/delete-softly/{{this._id}}?_method=PATCH">
+                            (-) Delete
+                        </a>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
         </div>
         {{/if}}
     </div>

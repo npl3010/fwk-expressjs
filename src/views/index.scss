@@ -34,20 +34,28 @@ body {
   }
 }
 
-.list {
-  width: 350px;
-
-  .list-item {
+.list-wrapper {
+  .list-actions {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
 
-    .item-content,
-    .item-actions {
+  .list {
+    width: 350px;
+
+    .list-item {
       display: flex;
-      justify-content: flex-start;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
+
+      .item-content,
+      .item-actions {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 8px;
+      }
     }
   }
 }

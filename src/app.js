@@ -4,6 +4,8 @@ const morgan = require('morgan');
 const route = require('./routes');
 const database = require('./config/database');
 const methodOverride = require('method-override');
+const sortMiddleware = require('./middlewares/sortMiddleware');
+const sortViewHelper = require('./helpers/view/sortViewHelper');
 
 const app = express();
 const port = 3000;
@@ -22,7 +24,16 @@ app.set('views', 'src/views');
 /**
  * 3. Setup template engines (view engines):
  */
-app.engine('hbs', engine({ extname: '.hbs' }));
+app.engine(
+  'hbs',
+  engine({
+    extname: '.hbs',
+    helpers: {
+      sum: (x, y) => x + y,
+      sortViewHelper,
+    },
+  })
+);
 app.set('view engine', 'hbs');
 
 /**
@@ -35,6 +46,7 @@ app.use(express.urlencoded({ extended: true })); // To parse incoming request bo
 app.use(express.json()); // To parse incoming JSON request bodies and make the resulting data available on the req.body property of the request object.
 app.use(morgan('combined')); // To log request details.
 app.use(methodOverride('_method')); // To override HTTP methods.
+app.use(sortMiddleware);
 
 /**
  * 5. Routing:

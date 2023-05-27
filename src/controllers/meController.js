@@ -9,7 +9,13 @@ class MeController {
     const fetchParams = {
       deleted_at: undefined,
     };
-    UserModal.find(fetchParams)
+    const fetch = UserModal.find(fetchParams);
+    if (res.locals.mySortCurrent.isEnabled) {
+      const sortType = res.locals.mySortCurrent.sortType;
+      const sortField = res.locals.mySortCurrent.sortField;
+      fetch.sort({ [sortField]: sortType });
+    }
+    fetch
       .then((docs) => {
         const userList = docs.map((doc) => {
           return doc.toObject();
